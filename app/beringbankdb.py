@@ -24,8 +24,8 @@ class User(Base):
         session.commit()
 
     @staticmethod
-    def get_user(session, username):
-        return session.query(User).filter_by(username=username).first()
+    def get_user(session, surname, firstname):
+        return session.query(User).filter_by(surname=surname, firstname=firstname).first()
 
 
 class Account(Base):
@@ -46,11 +46,14 @@ class Account(Base):
     def check_balance(self):
         return self.balance
 
-    def withdraw(self, amount):
+    def withdraw(self, amount, session):
         self.balance -= amount
+        session.commit()
 
-    def deposit(self, amount):
+    def deposit(self, amount, session):
+        print("DB: ", amount, type(amount))
         self.balance += amount
+        session.commit()
 
 class Card(Base):
     __tablename__ = 'cards'
@@ -103,11 +106,3 @@ class Card(Base):
 
     def enable_card(self):
         self.is_enabled = True
-
-# Initialize database
-engine = create_engine('sqlite:///banking.db')
-Base.metadata.create_all(engine)
-
-# Create a session
-Session = sessionmaker(bind=engine)
-session = Session()

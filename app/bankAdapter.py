@@ -9,6 +9,14 @@ class DatabaseAdapter:
 		new_user.create_user(self.session, surname, firstname, email)
 		print(new_user.firstname, new_user.surname)
 		return new_user
+	
+	def get_user(self, firstname: str, surname: str):
+		try:
+			user = User()
+			return user.get_user(self.session, surname, firstname)
+		except Exception as e:
+			print(f"Error getting user: {e}")
+			return None
 
 	def create_account(self, user_id):
 		new_account = Account()
@@ -26,11 +34,24 @@ class DatabaseAdapter:
 	def enable_card(self, card_id, repo):
 		return repo.enable_card(card_id)
 
-	def withdraw(self, account_id, amount, repo):
-		return repo.withdraw(account_id, amount)
+	def withdraw(self, account_id: int, amount: float):
+		account = self.session.query(Account).filter_by(id=account_id).first()
+		if account and account.balance >= amount:
+			account.balance -= amount
+			self.session.commit()
+			return True
+		return False
 
-	def deposit(self, account_id, amount, repo):
-		return repo.deposit(account_id, amount)
+	def deposit(self, account_id: int, amount: float):
+		account = self.session.query(Account).filter_by(id=account_id).first()
+		if account:
+			account.balance += amount
+			self.session.commit()
+			return True
+		return False
 
-	def check_balance(self, account_id, repo):
-		return repo.check_balance(account_id)
+	def check_balance(self, account_id: int):
+		account = self.session.query(Account).filter_by(id=account_id).first()
+		if account:
+			return account.balance
+		return 0.0
