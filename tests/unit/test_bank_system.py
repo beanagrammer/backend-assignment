@@ -1,4 +1,15 @@
 import pytest
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from app.bankAdapter import DatabaseAdapter
+from app.bank import Bank
+
+engine = create_engine('sqlite:///../../app/banking.db')
+Session = sessionmaker(bind=engine)
+session = Session()
+
+db_adapter = DatabaseAdapter(session)
+bank_app = Bank()
 
 
 
@@ -6,11 +17,14 @@ def account_factory():
     """
     Helper function to create account
     """
+    new_user = bank_app.create_user("ena", "test", db_adapter)
+    return bank_app.create_account(new_user.id, db_adapter=db_adapter)
 
 def card_factory(account_id):
     """
     Helper function to register card to a user
     """
+    return bank_app.register_card(account_id, db_adapter=db_adapter)
     
 
 
@@ -21,11 +35,14 @@ async def test_create_user_account():
     """
 
     #GIVEN
-        
+    surname = "So"
+    firstname = "Ena"
+    email = "ena_1@example.com"
     #WHEN
-        # Account Creating Logic
+    new_user = await bank_app.create_user(surname, firstname, email, db_adapter)
     #THEN
-        # Assertion
+    assert new_user.surname == surname
+    assert new_user.firstname == firstname
 
 @pytest.mark.asyncio
 async def test_register_cards():
@@ -35,6 +52,7 @@ async def test_register_cards():
 
     #WHEN
         # Card Registration Logic
+    #new_card = await bank_app.register_card(_account.id, db_adapter)
     #THEN
         # Assertion
 
