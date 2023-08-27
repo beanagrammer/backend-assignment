@@ -1,0 +1,95 @@
+INFO:root:User choice: 2
+INFO:root:Transitioned to LoggedInState.
+INFO:root:User choice: 2
+INFO:root:Account selected: 1
+INFO:root:Transitioned to AccountSelectedState.
+INFO:root:User choice: 2
+INFO:root:Amount entered: 50.0
+INFO:root:User choice: 1
+INFO:root:Amount entered: 45.0
+INFO:root:User choice: 6
+INFO:root:User choice: 7
+INFO:root:Transitioned to LoggedInState.
+INFO:root:User choice: 3
+INFO:root:Transitioned to LoggedOutState.
+INFO:root:User choice: 9
+2023-08-28 02:25:40,766 - INFO - User choice: 2
+2023-08-28 02:25:43,518 - INFO - Transitioned to LoggedInState.
+2023-08-28 02:25:46,052 - INFO - User choice: 2
+2023-08-28 02:25:47,534 - INFO - Account selected: 1
+2023-08-28 02:25:47,535 - INFO - Transitioned to AccountSelectedState.
+2023-08-28 02:25:49,019 - INFO - User choice: 1
+2023-08-28 02:25:49,926 - INFO - Amount entered: 30.0
+2023-08-28 02:25:59,728 - INFO - User choice: 2
+2023-08-28 02:26:01,935 - INFO - Amount entered: 40.0
+2023-08-28 02:31:53,538 - INFO - 1: Create User
+2023-08-28 02:31:53,539 - INFO - 2: Login
+2023-08-28 02:31:53,539 - INFO - 9: Quit
+2023-08-28 02:32:08,101 - INFO - 1: Create User
+2023-08-28 02:32:08,101 - INFO - 2: Login
+2023-08-28 02:32:08,101 - INFO - 9: Quit
+2023-08-28 02:33:42,611 - INFO - 1: Create User
+2023-08-28 02:33:42,611 - INFO - 2: Login
+2023-08-28 02:33:42,611 - INFO - 9: Quit
+2023-08-28 02:33:58,878 - INFO - User choice: 1
+2023-08-28 02:34:20,663 - INFO - Transitioned to LoggedInState.
+2023-08-28 02:34:20,664 - INFO - Welcome, Tom
+2023-08-28 02:34:20,664 - INFO - 1: Create Account
+2023-08-28 02:34:20,664 - INFO - 2: Choose Account
+2023-08-28 02:34:20,664 - INFO - 3: Logout
+2023-08-28 02:34:20,664 - INFO - 9: Quit
+2023-08-28 02:34:32,185 - INFO - User choice: 1
+2023-08-28 02:34:32,189 - INFO - Account successfully created.
+2023-08-28 02:34:32,190 - INFO - Welcome, Tom
+2023-08-28 02:34:32,190 - INFO - 1: Create Account
+2023-08-28 02:34:32,190 - INFO - 2: Choose Account
+2023-08-28 02:34:32,190 - INFO - 3: Logout
+2023-08-28 02:34:32,190 - INFO - 9: Quit
+2023-08-28 02:34:37,535 - INFO - User choice: 2
+2023-08-28 02:34:37,539 - INFO - 1. Account ID: 4, Balance: 0.0
+2023-08-28 02:34:47,687 - INFO - Account selected: 4
+2023-08-28 02:34:47,687 - INFO - Transitioned to AccountSelectedState.
+2023-08-28 02:34:47,688 - INFO - Account ID: 4, Balance: 0.0
+2023-08-28 02:34:47,688 - INFO - 1: Withdraw
+2023-08-28 02:34:47,688 - INFO - 2: Deposit
+2023-08-28 02:34:47,688 - INFO - 3: Register Card
+2023-08-28 02:34:47,688 - INFO - 4: Enable Card
+2023-08-28 02:34:47,688 - INFO - 5: Disable Card
+2023-08-28 02:34:47,688 - INFO - 6: Check Balance
+2023-08-28 02:34:47,688 - INFO - 7: Go back
+2023-08-28 02:34:51,577 - INFO - User choice: 7
+2023-08-28 02:34:51,577 - INFO - Transitioned to LoggedInState.
+2023-08-28 02:34:51,577 - INFO - Welcome, Tom
+2023-08-28 02:34:51,577 - INFO - 1: Create Account
+2023-08-28 02:34:51,577 - INFO - 2: Choose Account
+2023-08-28 02:34:51,577 - INFO - 3: Logout
+2023-08-28 02:34:51,578 - INFO - 9: Quit
+2023-08-28 02:34:53,290 - INFO - User choice: 9
+2023-08-28 02:34:53,290 - INFO - Goodbye!
+2023-08-28 02:35:49,913 - INFO - 1: Create User
+2023-08-28 02:35:49,913 - INFO - 2: Login
+2023-08-28 02:35:49,913 - INFO - 9: Quit
+2023-08-28 02:35:51,538 - INFO - User choice: 2
+2023-08-28 02:35:54,270 - INFO - Transitioned to LoggedInState.
+2023-08-28 02:35:54,270 - INFO - Welcome, Tom
+2023-08-28 02:35:54,270 - INFO - 1: Create Account
+2023-08-28 02:35:54,270 - INFO - 2: Choose Account
+2023-08-28 02:35:54,270 - INFO - 3: Logout
+2023-08-28 02:35:54,270 - INFO - 9: Quit
+2023-08-28 02:35:57,205 - INFO - User choice: 9
+2023-08-28 02:35:57,205 - INFO - Transitioned to LoggedOutState.
+2023-08-28 02:35:57,205 - INFO - Goodbye!
+2023-08-28 02:37:43,052 - INFO - User choice: 2
+2023-08-28 02:37:46,220 - INFO - User not found.
+2023-08-28 02:37:48,624 - INFO - User choice: 2
+2023-08-28 02:37:53,797 - INFO - Transitioned to LoggedInState.
+2023-08-28 02:37:53,797 - INFO - Welcome, Tom
+2023-08-28 02:38:00,214 - INFO - User choice: 3
+2023-08-28 02:38:00,214 - INFO - Transitioned to LoggedOutState.
+2023-08-28 02:38:02,343 - INFO - User choice: 9
+2023-08-28 02:38:02,343 - INFO - Goodbye!
+2023-08-28 02:40:00,352 - INFO - User choice: 1
+2023-08-28 02:40:08,984 - ERROR - An error occurred: (sqlite3.IntegrityError) UNIQUE constraint failed: users.firstname
+[SQL: INSERT INTO users (surname, firstname, email) VALUES (?, ?, ?)]
+[parameters: ('So', 'Ena', 'ena@ts.com')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
