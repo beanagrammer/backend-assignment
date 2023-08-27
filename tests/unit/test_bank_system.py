@@ -1,72 +1,78 @@
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from app.bankAdapter import DatabaseAdapter
 from app.bank import Bank
-
-engine = create_engine('sqlite:///../../app/banking.db')
-Session = sessionmaker(bind=engine)
-session = Session()
-
-db_adapter = DatabaseAdapter(session)
-bank_app = Bank()
+from app.bankAdapter import DatabaseAdapter
 
 
+def user_factory(session, surname, firstname, email):
+    db_adapter = DatabaseAdapter(session)
+    bank_app = Bank()
+    return bank_app.create_user(surname, firstname, email,db_adapter)
 
-def account_factory():
+def account_factory(session, user_id):
     """
     Helper function to create account
     """
-    new_user = bank_app.create_user("ena", "test", db_adapter)
-    return bank_app.create_account(new_user.id, db_adapter=db_adapter)
+    db_adapter = DatabaseAdapter(session)
+    bank_app = Bank()
+    return bank_app.create_account(user_id, adapter=db_adapter)
 
-def card_factory(account_id):
+def card_factory(session, account_id):
     """
     Helper function to register card to a user
     """
-    return bank_app.register_card(account_id, db_adapter=db_adapter)
-    
-
+    db_adapter = DatabaseAdapter(session)
+    bank_app = Bank()
+    return  bank_app.register_card(account_id, db_adapter)
 
 @pytest.mark.asyncio
-async def test_create_user_account():
+async def test_create_user_account(session):
     """
     Test Account Creating Logic
     """
-
+    print(session)
     #GIVEN
-    surname = "So"
-    firstname = "Ena"
-    email = "ena_1@example.com"
+    surname = "Gin"
+    firstname = "Dan"
+    email = "gin@test.com"
+    _user = await user_factory(session, surname, firstname, email)
     #WHEN
-    new_user = await bank_app.create_user(surname, firstname, email, db_adapter)
+    _account = await account_factory(session, _user.id)
     #THEN
-    assert new_user.surname == surname
-    assert new_user.firstname == firstname
+    assert _user.id == _account.user_id
 
 @pytest.mark.asyncio
-async def test_register_cards():
+async def test_register_cards(session):
 
     #GIVEN
-    _account = account_factory()
-
+    surname = "Lee"
+    firstname = "Jim"
+    email = "jim@test.com"
+    _user = await user_factory(session, surname, firstname, email)
+    _account = await account_factory(session, _user.id)
     #WHEN
         # Card Registration Logic
-    #new_card = await bank_app.register_card(_account.id, db_adapter)
+    _card = await card_factory(session, _account.id)
     #THEN
-        # Assertion
+    assert _card is not None
+    assert _account.id == _card.account_id
 
 
 @pytest.mark.asyncio
-async def test_disable_card():
+async def test_disable_card(session):
     #GIVEN
-    _account = account_factory()
-    _card = card_factory(account_id=...)
+    surname = "Strongman"
+    firstname = "Kev"
+    email = "kev_s@test.com"
+    _user = await user_factory(session, surname, firstname, email)
+    _account = await account_factory(session, _user.id)
+    _card = card_factory(account_id=_account.id)
 
     #WHEN
-        # Card Disabling Logic
+    db_adapter = DatabaseAdapter(session)
+    bank_app = Bank()
+    _disable = await bank_app.disable_card(_card.id, db_adapter)
     #THEN
-        #Assertion
+    assert _disable.is_enabled is not True
 
 @pytest.mark.asyncio
 async def test_enable_card():

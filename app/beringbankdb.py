@@ -16,17 +16,18 @@ class User(Base):
 
     accounts = relationship("Account", back_populates="user")
 
-    def create_user(self, session, surname, firstname, email):
+    async def create_user(self, session, surname, firstname, email):
         self.surname = surname
         self.firstname = firstname
         self.email = email
         session.add(self)
-        session.commit()
+        await session.commit()
 
     @staticmethod
-    def get_user(session, surname, firstname):
-        return session.query(User).filter_by(surname=surname, firstname=firstname).first()
+    async def get_user(session, surname, firstname):
+        return await session.run_sync(lambda session: session.query(User).filter_by(surname=surname, firstname=firstname).first())
 
+        return await session.query(User).filter_by(surname=surname, firstname=firstname).first()
 
 class Account(Base):
     __tablename__ = 'accounts'
@@ -37,23 +38,28 @@ class Account(Base):
     user = relationship("User", back_populates="accounts")
     cards = relationship("Card", back_populates="account")
 
-    def create_account(self, session, user_id):
+    async def create_account(self, session, user_id):
         self.user_id = user_id
         self.balance = 0.0  # Initial balance
         session.add(self)
-        session.commit()
+        await session.commit()
 
-    def check_balance(self):
-        return self.balance
+    @staticmethod
+    async def get_account_by_id(session, account_id):
+        return await session.run_sync(lambda session: session.query(Account).filter_by(id=account_id).first())
 
-    def withdraw(self, amount, session):
+    
+    async def check_balance(session, account_id):
+        balance = await session.run_sync(lambda session: session.query(Account).filter_by(id=account_id).first())
+        return balance
+
+    async def withdraw(self, amount, session):
         self.balance -= amount
-        session.commit()
+        await session.commit()
 
-    def deposit(self, amount, session):
-        print("DB: ", amount, type(amount))
+    async def deposit(self, amount, session):
         self.balance += amount
-        session.commit()
+        await session.commit()
 
 class Card(Base):
     __tablename__ = 'cards'
@@ -78,26 +84,18 @@ class Card(Base):
         return checksum % 10
 
     def generate_card_number(self, bin="123456"):
-        # Generate the first 15 digits randomly, given the BIN
         first_15_digits = f"{bin}{random.randint(10**(14-len(bin))-1, 10**(15-len(bin))-1)}"
-        
-        # Calculate the Luhn checksum for the first 15 digits
         checksum = self.luhn_checksum(int(first_15_digits))
-
-        # Choose the last digit so as to make the number valid
         last_digit = 10 - checksum if checksum != 0 else 0
-        
-        # Combine all the digits into a single string
         card_number = f"{first_15_digits}{last_digit}"
-        
         return card_number
     
-    def register_card(self, session, account_id):
+    async def register_card(self, session, account_id):
         self.account_id = account_id
         self.card_number = self.generate_card_number() 
         self.is_enabled = True 
         session.add(self)
-        session.commit()
+        await session.commit()
         return self.card_number
 
 
@@ -106,3 +104,4 @@ class Card(Base):
 
     def enable_card(self):
         self.is_enabled = True
+

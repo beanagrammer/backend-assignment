@@ -1,28 +1,22 @@
 import logging
-from datetime import datetime
 
 from bank import Bank
 from bankAdapter import DatabaseAdapter
-from beringbankdb import User, Account, Card
-from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 import asyncio
-import pytest_asyncio
 from sqlalchemy.ext.asyncio import (
-    AsyncEngine,
     create_async_engine,
     AsyncSession,
-    async_scoped_session
 )
 from sqlalchemy.orm import sessionmaker
 
 class State:
-    def handle(self, context):
+    async def handle(self, context):
         pass
 
 class LoggedOutState(State):
-    def handle(self, context):
+    async def handle(self, context):
         print("1: Create User")
         print("2: Login")
         print("9: Quit")
@@ -32,13 +26,13 @@ class LoggedOutState(State):
             surname = input("Enter surname: ")
             firstname = input("Enter firstname: ")
             email = input("Enter email: ")
-            context.user = context.bank_app.create_user(surname, firstname, email, context.db_adapter)
+            context.user = await context.bank_app.create_user(surname, firstname, email, context.db_adapter)
             context.state = LoggedInState()
             logging.info("Transitioned to LoggedInState.")
         elif choice == '2':
             surname = input("Enter surname: ")
             firstname = input("Enter firstname: ")
-            user = context.bank_app.get_user(firstname, surname, context.db_adapter)
+            user = await context.bank_app.get_user(firstname, surname, context.db_adapter)
             if user:
                 context.user = user
                 context.state = LoggedInState()
@@ -50,7 +44,7 @@ class LoggedOutState(State):
             context.running = False
 
 class LoggedInState(State):
-    def handle(self, context):
+    async def handle(self, context):
         logging.info(f"Welcome, {context.user.firstname}")
         print("1: Create Account")
         print("2: Choose Account")
@@ -59,10 +53,10 @@ class LoggedInState(State):
         choice = input("Enter your choice: ")
         logging.info(f"User choice: {choice}")
         if choice == '1':
-            context.bank_app.create_account(context.user.id, context.db_adapter)
+            await context.bank_app.create_account(context.user.id, context.db_adapter)
             logging.info("Account successfully created.")
         elif choice == '2':
-            accounts = context.bank_app.get_accounts(context.user.id, context.db_adapter)
+            accounts = await context.bank_app.get_accounts(context.user.id, context.db_adapter)
             if accounts:
                 for idx, account in enumerate(accounts):
                     logging.info(f"{idx + 1}. Account ID: {account.id}, Balance: {account.balance}")
@@ -83,7 +77,7 @@ class LoggedInState(State):
             context.running = False
 
 class AccountSelectedState(State):
-    def handle(self, context):
+    async def handle(self, context):
         logging.info(f"Account ID: {context.selected_account.id}, Balance: {context.selected_account.balance}")
         print("1: Withdraw")
         print("2: Deposit")
@@ -97,47 +91,53 @@ class AccountSelectedState(State):
         if choice == '1':
             amount = float(input("Enter amount to withdraw: "))
             logging.info(f"Amount entered: {amount}")
-            current_balance = context.bank_app.check_balance(context.selected_account.id, context.db_adapter)
+            current_balance = await context.bank_app.check_balance(context.selected_account.id, context.db_adapter)
             if amount > current_balance:
                 logging.info("Insufficient funds.")
-            context.bank_app.withdraw(context.selected_account.id, amount, context.db_adapter)
+            await context.bank_app.withdraw(context.selected_account.id, amount, context.db_adapter)
         elif choice == '2':
             amount = float(input("Enter amount to deposit: "))
             logging.info(f"Amount entered: {amount}")
-            context.bank_app.deposit(context.selected_account.id, amount, context.db_adapter)
+            await context.bank_app.deposit(context.selected_account.id, amount, context.db_adapter)
         elif choice == '3':
-            card = context.db_adapter.session.query(Card).filter_by(account_id=context.selected_account.id).first()
+            card = await context.bank_app.get_card(context.selected_account.id, context.db_adapter)
             if card:
                 logging.info("Card already registered for this account.")
             else:
-                context.bank_app.register_card(context.selected_account.id, context.db_adapter)
+                card = await context.bank_app.register_card(context.selected_account.id, context.db_adapter)
+                logging.info(f"{card.card_number} got registered on {context.selected_account.id}")
         elif choice == '4':
-            card = context.db_adapter.session.query(Card).filter_by(account_id=context.selected_account.id).first()
+            card = await context.bank_app.get_card(context.selected_account.id, context.db_adapter)
             if card and not card.is_enabled:
-                context.bank_app.enable_card(card.id, context.db_adapter)
+                await context.bank_app.enable_card(card.id, context.db_adapter)
+                logging.info(f"{card.card_number} got enabled on {context.selected_account.id}")
             else:
-                logging.info("Card is already enabled or not found.")
+                logging.info(f"Card {card.card_number}  is already enabled or not found.")
         elif choice == '5':
-            card = context.db_adapter.session.query(Card).filter_by(account_id=context.selected_account.id).first()
+            card = await context.bank_app.get_card(context.selected_account.id, context.db_adapter)
             if card and card.is_enabled:
-                context.bank_app.disable_card(card.id, context.db_adapter)
+                await context.bank_app.disable_card(card.id, context.db_adapter)
+                logging.info(f"{card.card_number} got disabled on {context.selected_account.id}")
             else:
-                logging.info("Card is already disabled or not found.")
+                logging.info(f"Card {card.card_number} is already disabled or not found.")
         elif choice == "6":
-            current_balance = context.bank_app.check_balance(context.selected_account.id, context.db_adapter)
+            current_balance = await context.bank_app.check_balance(context.selected_account.id, context.db_adapter)
             logging.info(f"Current account balance: {current_balance}")
         elif choice == '7':
             context.state = LoggedInState()
             logging.info("Transitioned to LoggedInState.")
 
 async def initialize_database():
-    engine = await create_async_engine('sqlite+aiosqlite:///banking.db', echo=True)
-    # async with engine.begin() as conn:
-    #     await conn.run_sync(Base.metadata.create_all)
-    return AsyncSession(engine)
+    engine = create_async_engine('sqlite+aiosqlite:///app/banking.db')
+    AsyncSessionLocal = sessionmaker(
+        bind=engine,
+        expire_on_commit=False,
+        class_=AsyncSession
+    )
+    return AsyncSessionLocal()
 
 class SimulatorContext:
-    async def __init__(self):
+    def __init__(self):
         self.state = LoggedOutState()
         self.user = None
         self.selected_account = None
@@ -146,10 +146,10 @@ class SimulatorContext:
         self.bank_app = Bank()
         self.db_adapter = DatabaseAdapter(self.session)
 
-    def run(self):
+    async def run(self):
         while self.running:
             try:
-                self.state.handle(self)
+                await self.state.handle(self)
             except Exception as e:
                 logging.error(f"An error occurred: {e}")
 
@@ -167,4 +167,4 @@ if __name__ == "__main__":
     handler.setFormatter(formatter)
     logging.basicConfig(handlers=[handler, stream_handler], level=logging.INFO)
 
-    SimulatorContext().run()
+    asyncio.run(SimulatorContext().run())

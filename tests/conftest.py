@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.orm import sessionmaker
 from app.config import get_db_uri
-
+import os
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -20,7 +20,7 @@ def event_loop():
 
 @pytest_asyncio.fixture(scope="session", autouse=True)
 async def aio_engine():
-    engine: AsyncEngine = create_async_engine(get_db_uri(), future=True)
+    engine: AsyncEngine = create_async_engine("sqlite+aiosqlite:///app/banking.db", future=True)
 
     # Write initial set up and teardown code.
 
