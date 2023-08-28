@@ -34,7 +34,7 @@ python3 -m app.async_simulator
 ```
 ### Logs
 ```
-/logs/bering_bank.log.{logged_date}
+/log/bering_bank.log.{logged_date}
 ```
 ### How to Run the Test
 ```
