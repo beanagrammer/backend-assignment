@@ -32,7 +32,10 @@ python3 -v # should be running <= 3.11.1
 pip install -r requirements.txt
 python3 -m app.async_simulator
 ```
-
+### Logs
+```
+/logs/bering_bank.log.{logged_date}
+```
 ### How to Run the Test
 ```
 pytest -v --log-level=DEBUG
