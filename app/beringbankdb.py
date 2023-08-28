@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, Boolean, ForeignKey
 from sqlalchemy.orm import relationship, declarative_base
 #from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, UniqueConstraint, and_, select
 from sqlalchemy.orm import sessionmaker
 import random
 
@@ -10,10 +10,10 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
-    surname = Column(String, unique=True)
-    firstname = Column(String, unique=True)
+    surname = Column(String)
+    firstname = Column(String)
     email = Column(String, unique=True)
-
+    __table_args__ = (UniqueConstraint('surname', 'firstname', name='unique_surname_firstname'),)
     accounts = relationship("Account", back_populates="user")
 
     async def create_user(self, session, surname, firstname, email):
@@ -56,18 +56,24 @@ class Account(Base):
     async def withdraw(self, amount, session):
         self.balance -= amount
         await session.commit()
+        return self.balance
 
     async def deposit(self, amount, session):
         self.balance += amount
         await session.commit()
+        return self.balance
 
 class Card(Base):
     __tablename__ = 'cards'
     id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
     account_id = Column(Integer, ForeignKey('accounts.id'))
-    is_enabled = Column(Boolean)
+    test_col = Column(Integer, default=100)
     card_number = Column(Integer)
+    enabled = Column(Boolean, default=False)
+
     account = relationship("Account", back_populates="cards")
+    user = relationship("User")
 
     def luhn_checksum(self, card_number):
         def digits_of(n):
@@ -90,18 +96,40 @@ class Card(Base):
         card_number = f"{first_15_digits}{last_digit}"
         return card_number
     
-    async def register_card(self, session, account_id):
+    async def register_card(self, session, account_id, user_id):
+        self.user_id = user_id
         self.account_id = account_id
         self.card_number = self.generate_card_number() 
-        self.is_enabled = True 
+        self.enabled = True 
         session.add(self)
         await session.commit()
         return self.card_number
 
+    @staticmethod
+    async def disable_card(session, card_id, account_id, user_id):
+        card = await session.run_sync(lambda session: session.query(Card).filter_by(id=card_id, account_id=account_id, user_id=user_id).first())
+        if card is None:
+            return "Card not found"
+        card.enabled = False
+        session.add(card)
+        await session.commit()
+        print(card.enabled)
+        return card
 
-    def disable_card(self):
-        self.is_enabled = False
+    @staticmethod
+    async def enable_card(session, card_id, account_id, user_id):
+        card = await session.run_sync(lambda session: session.query(Card).filter_by(id=card_id, account_id=account_id, user_id=user_id).first())
+        card.enabled = True
+        session.add(card)
+        await session.commit()
+        print("ENABLE: ", card.enabled)
+        return card
 
-    def enable_card(self):
-        self.is_enabled = True
+    @staticmethod
+    async def is_enabled(session, card_id, account_id, user_id):
+        card = await session.run_sync(lambda session: session.query(Card).filter_by(id=card_id, account_id=account_id, user_id=user_id).first())
+        print(card)
+        if card is None:
+            return "Card not found"
+        return card.enabled
 

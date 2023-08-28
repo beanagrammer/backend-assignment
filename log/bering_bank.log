@@ -27174,3 +27174,298 @@ INFO:root:User choice: 9
 2023-08-28 05:58:20,283 - INFO - User choice: 1
 2023-08-28 05:58:21,657 - INFO - Amount entered: 25.0
 2023-08-28 05:58:21,663 - INFO - Account ID: 1, Balance: 25.0
+2023-08-28 06:31:48,425 - INFO - User choice: 1
+2023-08-28 06:32:02,780 - INFO - Transitioned to LoggedInState.
+2023-08-28 06:32:02,780 - INFO - Welcome, Lay
+2023-08-28 06:32:05,284 - INFO - User choice: 1
+2023-08-28 06:32:05,290 - INFO - Account successfully created.
+2023-08-28 06:32:05,290 - INFO - Welcome, Lay
+2023-08-28 06:32:07,640 - INFO - User choice: 2
+2023-08-28 06:32:07,646 - INFO - 1. Account ID: 2, Balance: 0.0
+2023-08-28 06:32:09,180 - INFO - Account selected: 2
+2023-08-28 06:32:09,180 - INFO - Transitioned to AccountSelectedState.
+2023-08-28 06:32:09,180 - INFO - Account ID: 2, Balance: 0.0
+2023-08-28 06:32:13,526 - INFO - User choice: 3
+2023-08-28 06:32:13,530 - ERROR - An error occurred: DatabaseAdapter.register_card() takes 2 positional arguments but 3 were given
+2023-08-28 06:32:13,530 - INFO - Account ID: 2, Balance: 0.0
+2023-08-28 06:32:45,532 - ERROR - The garbage collector is trying to clean up non-checked-in connection <AdaptedConnection <Connection(Thread-3, stopped daemon 6109720576)>>, which will be dropped, as it cannot be safely terminated.  Please ensure that SQLAlchemy pooled connections are returned to the pool explicitly, either by calling ``close()`` or by using appropriate context managers to manage their lifecycle.
+2023-08-28 06:32:47,496 - INFO - User choice: 2
+2023-08-28 06:32:51,683 - INFO - Transitioned to LoggedInState.
+2023-08-28 06:32:51,684 - INFO - Welcome, Lay
+2023-08-28 06:32:54,048 - INFO - User choice: 2
+2023-08-28 06:32:54,053 - INFO - 1. Account ID: 2, Balance: 0.0
+2023-08-28 06:32:55,484 - INFO - Account selected: 2
+2023-08-28 06:32:55,484 - INFO - Transitioned to AccountSelectedState.
+2023-08-28 06:32:55,484 - INFO - Account ID: 2, Balance: 0.0
+2023-08-28 06:32:57,159 - INFO - User choice: 3
+2023-08-28 06:32:57,167 - INFO - 1234562966840046 got registered on 2
+2023-08-28 06:32:57,167 - INFO - Account ID: 2, Balance: 0.0
+2023-08-28 07:23:23,304 - INFO - User choice: 2
+2023-08-28 07:23:26,080 - INFO - Transitioned to LoggedInState.
+2023-08-28 07:23:26,080 - INFO - Welcome, Dan
+2023-08-28 07:23:27,199 - INFO - User choice: 2
+2023-08-28 07:23:27,202 - INFO - 1. Account ID: 3, Balance: 0.0
+2023-08-28 07:23:31,938 - ERROR - An error occurred: list index out of range
+2023-08-28 07:23:31,938 - INFO - Welcome, Dan
+2023-08-28 07:23:39,345 - INFO - User choice: 2
+2023-08-28 07:23:39,348 - INFO - 1. Account ID: 3, Balance: 0.0
+2023-08-28 07:23:40,319 - INFO - Account selected: 3
+2023-08-28 07:23:40,319 - INFO - Transitioned to AccountSelectedState.
+2023-08-28 07:23:40,319 - INFO - Account ID: 3, Balance: 0.0
+2023-08-28 07:23:45,053 - INFO - User choice: 6
+2023-08-28 07:23:45,055 - INFO - Current account balance: 0.0
+2023-08-28 07:23:45,055 - INFO - Account ID: 3, Balance: 0.0
+2023-08-28 07:23:48,963 - ERROR - The garbage collector is trying to clean up non-checked-in connection <AdaptedConnection <Connection(Thread-1, stopped daemon 6176583680)>>, which will be dropped, as it cannot be safely terminated.  Please ensure that SQLAlchemy pooled connections are returned to the pool explicitly, either by calling ``close()`` or by using appropriate context managers to manage their lifecycle.
+2023-08-28 07:40:14,550 - INFO - User choice: 2
+2023-08-28 07:40:17,637 - INFO - Transitioned to LoggedInState.
+2023-08-28 07:40:17,637 - INFO - Welcome, Sam
+2023-08-28 07:40:20,706 - INFO - User choice: 2
+2023-08-28 07:40:20,711 - INFO - 1. Account ID: 1, Balance: 0.0
+2023-08-28 07:40:22,784 - INFO - Account selected: 1
+2023-08-28 07:40:22,784 - INFO - Transitioned to AccountSelectedState.
+2023-08-28 07:40:22,784 - INFO - Account ID: 1, Balance: 0.0
+2023-08-28 07:40:26,849 - INFO - User choice: 3
+2023-08-28 07:40:26,852 - INFO - Card already registered for this account.
+2023-08-28 07:40:26,852 - INFO - Account ID: 1, Balance: 0.0
+2023-08-28 07:40:32,022 - INFO - User choice: 4
+2023-08-28 07:40:32,024 - INFO - Card 1234562492705047  is already enabled or not found.
+2023-08-28 07:40:32,025 - INFO - Account ID: 1, Balance: 0.0
+2023-08-28 07:40:37,202 - INFO - User choice: 5
+2023-08-28 07:40:37,204 - ERROR - An error occurred: Card.disable_card() missing 1 required positional argument: 'user_id'
+2023-08-28 07:40:37,204 - INFO - Account ID: 1, Balance: 0.0
+2023-08-28 07:42:55,565 - ERROR - The garbage collector is trying to clean up non-checked-in connection <AdaptedConnection <Connection(Thread-1, stopped daemon 6187167744)>>, which will be dropped, as it cannot be safely terminated.  Please ensure that SQLAlchemy pooled connections are returned to the pool explicitly, either by calling ``close()`` or by using appropriate context managers to manage their lifecycle.
+2023-08-28 08:47:07,054 - INFO - User choice: 1
+2023-08-28 08:47:18,000 - INFO - Transitioned to LoggedInState.
+2023-08-28 08:47:18,000 - INFO - Welcome, Zimmer
+2023-08-28 08:47:23,375 - INFO - User choice: 1
+2023-08-28 08:47:23,380 - INFO - Account successfully created.
+2023-08-28 08:47:23,380 - INFO - Welcome, Zimmer
+2023-08-28 08:47:25,797 - INFO - User choice: 2
+2023-08-28 08:47:25,803 - INFO - 1. Account ID: 3, Balance: 0.0
+2023-08-28 08:47:28,870 - INFO - Account selected: 3
+2023-08-28 08:47:28,871 - INFO - Transitioned to AccountSelectedState.
+2023-08-28 08:47:28,871 - INFO - Account ID: 3, Balance: 0.0
+2023-08-28 08:47:32,232 - INFO - User choice: 2
+2023-08-28 08:47:33,934 - INFO - Amount entered: 4000.0
+2023-08-28 08:47:33,942 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:47:39,072 - INFO - User choice: 4
+2023-08-28 08:47:39,077 - ERROR - An error occurred: 'NoneType' object has no attribute 'card_number'
+2023-08-28 08:47:39,078 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:47:47,688 - INFO - User choice: 5
+2023-08-28 08:47:47,690 - ERROR - An error occurred: 'NoneType' object has no attribute 'card_number'
+2023-08-28 08:47:47,691 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:50:38,743 - ERROR - The garbage collector is trying to clean up non-checked-in connection <AdaptedConnection <Connection(Thread-4, stopped daemon 6141489152)>>, which will be dropped, as it cannot be safely terminated.  Please ensure that SQLAlchemy pooled connections are returned to the pool explicitly, either by calling ``close()`` or by using appropriate context managers to manage their lifecycle.
+2023-08-28 08:50:42,353 - INFO - User choice: 2
+2023-08-28 08:50:48,730 - INFO - Transitioned to LoggedInState.
+2023-08-28 08:50:48,730 - INFO - Welcome, Zimmer
+2023-08-28 08:50:50,164 - INFO - User choice: 2
+2023-08-28 08:50:50,168 - INFO - 1. Account ID: 3, Balance: 4000.0
+2023-08-28 08:50:53,266 - INFO - Account selected: 3
+2023-08-28 08:50:53,267 - INFO - Transitioned to AccountSelectedState.
+2023-08-28 08:50:53,267 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:50:55,708 - INFO - User choice: 4
+2023-08-28 08:50:55,713 - ERROR - An error occurred: 'NoneType' object has no attribute 'card_number'
+2023-08-28 08:50:55,713 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:51:24,634 - ERROR - The garbage collector is trying to clean up non-checked-in connection <AdaptedConnection <Connection(Thread-1, stopped daemon 6173634560)>>, which will be dropped, as it cannot be safely terminated.  Please ensure that SQLAlchemy pooled connections are returned to the pool explicitly, either by calling ``close()`` or by using appropriate context managers to manage their lifecycle.
+2023-08-28 08:51:27,784 - INFO - User choice: 2
+2023-08-28 08:51:32,274 - INFO - Transitioned to LoggedInState.
+2023-08-28 08:51:32,274 - INFO - Welcome, Zimmer
+2023-08-28 08:51:34,482 - INFO - User choice: 2
+2023-08-28 08:51:34,485 - INFO - 1. Account ID: 3, Balance: 4000.0
+2023-08-28 08:51:35,040 - INFO - Account selected: 3
+2023-08-28 08:51:35,041 - INFO - Transitioned to AccountSelectedState.
+2023-08-28 08:51:35,041 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:51:40,137 - INFO - User choice: 5
+2023-08-28 08:51:40,141 - ERROR - An error occurred: 'NoneType' object has no attribute 'card_number'
+2023-08-28 08:51:40,141 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:29,275 - ERROR - The garbage collector is trying to clean up non-checked-in connection <AdaptedConnection <Connection(Thread-1, stopped daemon 6107803648)>>, which will be dropped, as it cannot be safely terminated.  Please ensure that SQLAlchemy pooled connections are returned to the pool explicitly, either by calling ``close()`` or by using appropriate context managers to manage their lifecycle.
+2023-08-28 08:53:32,810 - INFO - User choice: 2
+2023-08-28 08:53:36,395 - INFO - Transitioned to LoggedInState.
+2023-08-28 08:53:36,395 - INFO - Welcome, Zimmer
+2023-08-28 08:53:37,829 - INFO - User choice: 2
+2023-08-28 08:53:37,834 - INFO - 1. Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:38,187 - INFO - Account selected: 3
+2023-08-28 08:53:38,187 - INFO - Transitioned to AccountSelectedState.
+2023-08-28 08:53:38,187 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:39,710 - INFO - User choice: 5
+2023-08-28 08:53:39,714 - INFO - Card is already disabled or not found.
+2023-08-28 08:53:39,714 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:44,449 - INFO - User choice: 4
+2023-08-28 08:53:44,450 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:44,450 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:46,159 - INFO - User choice: 5
+2023-08-28 08:53:46,161 - INFO - Card is already disabled or not found.
+2023-08-28 08:53:46,161 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:46,520 - INFO - User choice: 4
+2023-08-28 08:53:46,524 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:46,525 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:46,796 - INFO - User choice: 5
+2023-08-28 08:53:46,799 - INFO - Card is already disabled or not found.
+2023-08-28 08:53:46,799 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:47,061 - INFO - User choice: 4
+2023-08-28 08:53:47,063 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:47,063 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:47,308 - INFO - User choice: 5
+2023-08-28 08:53:47,310 - INFO - Card is already disabled or not found.
+2023-08-28 08:53:47,310 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:47,559 - INFO - User choice: 4
+2023-08-28 08:53:47,561 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:47,561 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:47,799 - INFO - User choice: 5
+2023-08-28 08:53:47,801 - INFO - Card is already disabled or not found.
+2023-08-28 08:53:47,802 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:48,058 - INFO - User choice: 4
+2023-08-28 08:53:48,060 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:48,060 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:48,298 - INFO - User choice: 5
+2023-08-28 08:53:48,299 - INFO - Card is already disabled or not found.
+2023-08-28 08:53:48,299 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:48,558 - INFO - User choice: 4
+2023-08-28 08:53:48,560 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:48,560 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:48,804 - INFO - User choice: 5
+2023-08-28 08:53:48,806 - INFO - Card is already disabled or not found.
+2023-08-28 08:53:48,806 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:49,061 - INFO - User choice: 4
+2023-08-28 08:53:49,064 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:49,064 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:49,296 - INFO - User choice: 5
+2023-08-28 08:53:49,299 - INFO - Card is already disabled or not found.
+2023-08-28 08:53:49,299 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:49,557 - INFO - User choice: 4
+2023-08-28 08:53:49,560 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:49,560 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:49,821 - INFO - User choice: 5
+2023-08-28 08:53:49,823 - INFO - Card is already disabled or not found.
+2023-08-28 08:53:49,823 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:50,082 - INFO - User choice: 4
+2023-08-28 08:53:50,084 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:50,084 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:50,340 - INFO - User choice: 5
+2023-08-28 08:53:50,343 - INFO - Card is already disabled or not found.
+2023-08-28 08:53:50,343 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:50,623 - INFO - User choice: 4
+2023-08-28 08:53:50,625 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:50,626 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:50,915 - INFO - User choice: 5
+2023-08-28 08:53:50,916 - INFO - Card is already disabled or not found.
+2023-08-28 08:53:50,916 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:51,273 - INFO - User choice: 45
+2023-08-28 08:53:51,274 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:51,606 - INFO - User choice: 4
+2023-08-28 08:53:51,607 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:51,607 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:51,867 - INFO - User choice: 5
+2023-08-28 08:53:51,868 - INFO - Card is already disabled or not found.
+2023-08-28 08:53:51,868 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:52,150 - INFO - User choice: 4
+2023-08-28 08:53:52,152 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:52,152 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:52,395 - INFO - User choice: 5
+2023-08-28 08:53:52,398 - INFO - Card is already disabled or not found.
+2023-08-28 08:53:52,398 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:53,256 - INFO - User choice: 44
+2023-08-28 08:53:53,256 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:55,638 - INFO - User choice: 4
+2023-08-28 08:53:55,640 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:55,640 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:57,914 - INFO - User choice: 4
+2023-08-28 08:53:57,916 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:57,917 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:58,560 - INFO - User choice: 4
+2023-08-28 08:53:58,561 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:58,561 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:59,105 - INFO - User choice: 4
+2023-08-28 08:53:59,107 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:59,108 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:53:59,744 - INFO - User choice: 4
+2023-08-28 08:53:59,745 - INFO - Card  is already enabled or not found.
+2023-08-28 08:53:59,745 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:54:27,824 - INFO - User choice: 3
+2023-08-28 08:54:27,831 - INFO - 1234565725411694 got registered on 3
+2023-08-28 08:54:27,831 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:54:37,745 - INFO - User choice: 5
+2023-08-28 08:54:37,752 - INFO - Card got disabled on account 3
+2023-08-28 08:54:37,752 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:54:40,636 - INFO - User choice: 4
+2023-08-28 08:54:40,640 - INFO - Card  is already enabled or not found.
+2023-08-28 08:54:40,640 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:54:45,225 - INFO - User choice: 5
+2023-08-28 08:54:45,229 - INFO - Card got disabled on account 3
+2023-08-28 08:54:45,230 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:54:49,356 - INFO - User choice: 5
+2023-08-28 08:54:49,362 - INFO - Card got disabled on account 3
+2023-08-28 08:54:49,362 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:54:50,630 - INFO - User choice: 4
+2023-08-28 08:54:50,633 - INFO - Card  is already enabled or not found.
+2023-08-28 08:54:50,634 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:55:53,915 - ERROR - The garbage collector is trying to clean up non-checked-in connection <AdaptedConnection <Connection(Thread-5, stopped daemon 6181498880)>>, which will be dropped, as it cannot be safely terminated.  Please ensure that SQLAlchemy pooled connections are returned to the pool explicitly, either by calling ``close()`` or by using appropriate context managers to manage their lifecycle.
+2023-08-28 08:55:56,600 - INFO - User choice: 2
+2023-08-28 08:55:59,483 - INFO - Transitioned to LoggedInState.
+2023-08-28 08:55:59,483 - INFO - Welcome, Zimmer
+2023-08-28 08:56:00,436 - INFO - User choice: 2
+2023-08-28 08:56:00,439 - INFO - 1. Account ID: 3, Balance: 4000.0
+2023-08-28 08:56:00,767 - INFO - Account selected: 3
+2023-08-28 08:56:00,767 - INFO - Transitioned to AccountSelectedState.
+2023-08-28 08:56:00,767 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:56:03,132 - INFO - User choice: 5
+2023-08-28 08:56:03,136 - INFO - Card got disabled on account 3
+2023-08-28 08:56:03,136 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:56:05,602 - INFO - User choice: 4
+2023-08-28 08:56:05,606 - INFO - Card  is already enabled or not found.
+2023-08-28 08:56:05,606 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:57:28,030 - ERROR - The garbage collector is trying to clean up non-checked-in connection <AdaptedConnection <Connection(Thread-2, stopped daemon 6175043584)>>, which will be dropped, as it cannot be safely terminated.  Please ensure that SQLAlchemy pooled connections are returned to the pool explicitly, either by calling ``close()`` or by using appropriate context managers to manage their lifecycle.
+2023-08-28 08:57:32,896 - INFO - User choice: 2
+2023-08-28 08:57:37,993 - INFO - Transitioned to LoggedInState.
+2023-08-28 08:57:37,993 - INFO - Welcome, Zimmer
+2023-08-28 08:57:39,068 - INFO - User choice: 2
+2023-08-28 08:57:39,072 - INFO - 1. Account ID: 3, Balance: 4000.0
+2023-08-28 08:57:39,462 - INFO - Account selected: 3
+2023-08-28 08:57:39,463 - INFO - Transitioned to AccountSelectedState.
+2023-08-28 08:57:39,463 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:57:42,300 - INFO - User choice: 3
+2023-08-28 08:57:42,304 - INFO - Card already registered for this account.
+2023-08-28 08:57:42,304 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:57:47,946 - INFO - User choice: 5
+2023-08-28 08:57:47,952 - INFO - Card got disabled on account 3
+2023-08-28 08:57:47,952 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 08:58:29,877 - INFO - User choice: 4
+2023-08-28 08:58:29,882 - INFO - Card  is already enabled or not found.
+2023-08-28 08:58:29,882 - INFO - Account ID: 3, Balance: 4000.0
+2023-08-28 09:00:23,207 - ERROR - The garbage collector is trying to clean up non-checked-in connection <AdaptedConnection <Connection(Thread-2, stopped daemon 6139932672)>>, which will be dropped, as it cannot be safely terminated.  Please ensure that SQLAlchemy pooled connections are returned to the pool explicitly, either by calling ``close()`` or by using appropriate context managers to manage their lifecycle.
+2023-08-28 09:10:01,063 - INFO - User choice: 1
+2023-08-28 09:10:08,543 - INFO - Transitioned to LoggedInState.
+2023-08-28 09:10:08,543 - INFO - Welcome, Me
+2023-08-28 09:10:10,114 - INFO - User choice: 1
+2023-08-28 09:10:10,121 - INFO - Account successfully created.
+2023-08-28 09:10:10,121 - INFO - Welcome, Me
+2023-08-28 09:10:12,150 - INFO - User choice: 2
+2023-08-28 09:10:12,154 - INFO - 1. Account ID: 1, Balance: 0.0
+2023-08-28 09:10:12,860 - INFO - Account selected: 1
+2023-08-28 09:10:12,860 - INFO - Transitioned to AccountSelectedState.
+2023-08-28 09:10:12,860 - INFO - Account ID: 1, Balance: 0.0
+2023-08-28 09:10:14,863 - INFO - User choice: 2
+2023-08-28 09:10:16,110 - INFO - Amount entered: 4000.0
+2023-08-28 09:10:16,118 - INFO - Account ID: 1, Balance: 4000.0
+2023-08-28 09:10:18,994 - INFO - User choice: 3
+2023-08-28 09:10:19,001 - INFO - 1234567509346734 got registered on 1
+2023-08-28 09:10:19,001 - INFO - Account ID: 1, Balance: 4000.0
+2023-08-28 09:10:40,919 - INFO - User choice: 5
+2023-08-28 09:10:40,928 - INFO - Card got disabled on account 1
+2023-08-28 09:10:40,928 - INFO - Account ID: 1, Balance: 4000.0
+2023-08-28 09:10:48,200 - INFO - User choice: 4
+2023-08-28 09:10:48,208 - INFO - Card got enabled on account1
+2023-08-28 09:10:48,208 - INFO - Account ID: 1, Balance: 4000.0
+2023-08-28 09:10:58,438 - INFO - User choice: 1
+2023-08-28 09:11:00,100 - INFO - Amount entered: 344.0
+2023-08-28 09:11:00,104 - INFO - Account ID: 1, Balance: 3656.0
+2023-08-28 09:11:03,536 - INFO - User choice: 6
+2023-08-28 09:11:03,541 - INFO - Current account balance: 3656.0
+2023-08-28 09:11:03,541 - INFO - Account ID: 1, Balance: 3656.0
+2023-08-28 09:11:07,188 - INFO - User choice: 7
+2023-08-28 09:11:07,188 - INFO - Transitioned to LoggedInState.
+2023-08-28 09:11:07,188 - INFO - Welcome, Me
+2023-08-28 09:11:09,919 - INFO - User choice: 9
+2023-08-28 09:11:09,919 - INFO - Transitioned to LoggedOutState.
+2023-08-28 09:11:09,919 - INFO - Goodbye!
+2023-08-28 09:11:09,935 - ERROR - The garbage collector is trying to clean up non-checked-in connection <AdaptedConnection <Connection(Thread-8, stopped daemon 6113390592)>>, which will be dropped, as it cannot be safely terminated.  Please ensure that SQLAlchemy pooled connections are returned to the pool explicitly, either by calling ``close()`` or by using appropriate context managers to manage their lifecycle.

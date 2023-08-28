@@ -2,7 +2,6 @@ import pytest
 from app.bank import Bank
 from app.bankAdapter import DatabaseAdapter
 
-
 def user_factory(session, surname, firstname, email):
     db_adapter = DatabaseAdapter(session)
     bank_app = Bank()
@@ -16,20 +15,19 @@ def account_factory(session, user_id):
     bank_app = Bank()
     return bank_app.create_account(user_id, adapter=db_adapter)
 
-def card_factory(session, account_id):
+def card_factory(session, account_id, user_id):
     """
     Helper function to register card to a user
     """
     db_adapter = DatabaseAdapter(session)
     bank_app = Bank()
-    return  bank_app.register_card(account_id, db_adapter)
+    return  bank_app.register_card(account_id, user_id, db_adapter)
 
 @pytest.mark.asyncio
 async def test_create_user_account(session):
     """
     Test Account Creating Logic
     """
-    print(session)
     #GIVEN
     surname = "Gin"
     firstname = "Dan"
@@ -42,16 +40,15 @@ async def test_create_user_account(session):
 
 @pytest.mark.asyncio
 async def test_register_cards(session):
-
     #GIVEN
     surname = "Lee"
-    firstname = "Jim"
-    email = "jim@test.com"
+    firstname = "Sam"
+    email = "lsam@test.com"
     _user = await user_factory(session, surname, firstname, email)
     _account = await account_factory(session, _user.id)
     #WHEN
         # Card Registration Logic
-    _card = await card_factory(session, _account.id)
+    _card = await card_factory(session, _account.id, _user.id)
     #THEN
     assert _card is not None
     assert _account.id == _card.account_id
@@ -60,67 +57,93 @@ async def test_register_cards(session):
 @pytest.mark.asyncio
 async def test_disable_card(session):
     #GIVEN
-    surname = "Strongman"
-    firstname = "Kev"
-    email = "kev_s@test.com"
-    _user = await user_factory(session, surname, firstname, email)
-    _account = await account_factory(session, _user.id)
-    _card = card_factory(account_id=_account.id)
-
-    #WHEN
-    db_adapter = DatabaseAdapter(session)
+    surname = "Lee"
+    firstname = "Sam"
+    email = "lsam@test.com"
     bank_app = Bank()
-    _disable = await bank_app.disable_card(_card.id, db_adapter)
-    #THEN
-    assert _disable.is_enabled is not True
-
-@pytest.mark.asyncio
-async def test_enable_card():
-    #GIVEN
-    _account = account_factory()
-    _card = card_factory(account_id=...)
+    db_adapter = DatabaseAdapter(session)
+    _user = await bank_app.get_user(surname=surname, firstname=firstname, adapter=db_adapter)
+    _account = await bank_app.get_accounts(_user.id, db_adapter)
+    _card = await bank_app.get_card(_account[0].id, db_adapter)
 
     #WHEN
-        # Card Enabling Logic
+    await bank_app.disable_card(_card.id, _account[0].id, _user.id, db_adapter)
+    is_enabled = await bank_app.is_enabled(_card.id, _account[0].id, _user.id, db_adapter)
+    #THEN
+    assert is_enabled is not True
+
+@pytest.mark.asyncio
+async def test_enable_card(session):
+    #GIVEN
+    surname = "Lee"
+    firstname = "Sam"
+    email = "lsam@test.com"
+    bank_app = Bank()
+    db_adapter = DatabaseAdapter(session)
+    _user = await bank_app.get_user(surname=surname, firstname=firstname, adapter=db_adapter)
+    _account = await bank_app.get_accounts(_user.id, db_adapter)
+    _card = await bank_app.get_card(_account[0].id, db_adapter)
+
+    #WHEN
+    await bank_app.enable_card(_card.id, _account[0].id, _user.id, db_adapter)
+    is_enabled = await bank_app.is_enabled(_card.id, _account[0].id, _user.id, db_adapter)      
+    #THEN
+    assert is_enabled is True
             
-    #THEN
-        #Assertion
-            
 
 
 @pytest.mark.asyncio
-async def test_deposit_cash():
+async def test_deposit_cash(session):
     #GIVEN
-    _account = account_factory()
-    _card = card_factory(account_id=...)
+    surname = "Lee"
+    firstname = "Sam"
+    bank_app = Bank()
+    db_adapter = DatabaseAdapter(session)
+    _user = await bank_app.get_user(surname=surname, firstname=firstname, adapter=db_adapter)
+    _account = await bank_app.get_accounts(_user.id, db_adapter)
+    _amount = 50
+    #WHEN
+    init_bal = await bank_app.check_balance(_account[0].id, db_adapter)
+    await bank_app.deposit(_account[0].id, _amount, db_adapter)
+    new_bal = await bank_app.check_balance(_account[0].id, db_adapter)
+    #THEN
+    assert init_bal + _amount == new_bal
+
+
+@pytest.mark.asyncio
+async def test_withdraw_cash(session):
+    #GIVEN
+    surname = "Lee"
+    firstname = "Sam"
+    bank_app = Bank()
+    db_adapter = DatabaseAdapter(session)
+    _user = await bank_app.get_user(surname=surname, firstname=firstname, adapter=db_adapter)
+    _account = await bank_app.get_accounts(_user.id, db_adapter)
+    _amount = 30
 
     #WHEN
-        # Money Saving Logic
+    init_bal = await bank_app.check_balance(_account[0].id, db_adapter)
+    await bank_app.withdraw(_account[0].id, _amount, db_adapter)
+    new_bal = await bank_app.check_balance(_account[0].id, db_adapter)
 
     #THEN
-
-@pytest.mark.asyncio
-async def test_withdraw_cash():
-    #GIVEN
-    _account = account_factory()
-    _card = card_factory(account_id=...)
-
-    #WHEN
-        # Money Withdrawing Logic
-
-    #THEN
+    assert init_bal - _amount == new_bal
 
 
 
 @pytest.mark.asyncio
-async def test_check_account_balance():
+async def test_check_account_balance(session):
     ...
     #GIVEN
-    _account = account_factory()
-    _card = card_factory(account_id=...)
+    surname = "Lee"
+    firstname = "Sam"
+    bank_app = Bank()
+    db_adapter = DatabaseAdapter(session)
+    _user = await bank_app.get_user(surname=surname, firstname=firstname, adapter=db_adapter)
+    _account = await bank_app.get_accounts(_user.id, db_adapter)
 
     #WHEN
-        # Balace checking Logic
+    balance = await bank_app.check_balance(_account[0].id, db_adapter)
             
     #THEN
-        #Assertion
+    assert balance is not None

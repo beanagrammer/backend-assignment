@@ -113,13 +113,13 @@ class AccountSelectedState(State):
                 context.bank_app.register_card(context.selected_account.id, context.db_adapter)
         elif choice == '4':
             card = context.db_adapter.session.query(Card).filter_by(account_id=context.selected_account.id).first()
-            if card and not card.is_enabled:
+            if card and not card.enabled:
                 context.bank_app.enable_card(card.id, context.db_adapter)
             else:
                 logging.info("Card is already enabled or not found.")
         elif choice == '5':
             card = context.db_adapter.session.query(Card).filter_by(account_id=context.selected_account.id).first()
-            if card and card.is_enabled:
+            if card and card.enabled:
                 context.bank_app.disable_card(card.id, context.db_adapter)
             else:
                 logging.info("Card is already disabled or not found.")

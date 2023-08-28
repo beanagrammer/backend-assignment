@@ -27,21 +27,23 @@ class DatabaseAdapter:
         return new_account
     
 
-    async def register_card(self, account_id):
+    async def register_card(self, account_id, user_id):
         new_card = Card()
-        await new_card.register_card(self.session, account_id)
+        await new_card.register_card(self.session, account_id, user_id)
         return new_card
     
     async def get_card(self, account_id):
         card = await self.session.run_sync(lambda session: session.query(Card).filter_by(account_id=account_id).first())
         return card
 
+    async def is_enabled(self, card_id, account_id, user_id):
+        return await Card.is_enabled(self.session, card_id, account_id, user_id)
 
-    async def disable_card(self, card_id, repo):
-        return await repo.disable_card(card_id)
+    async def disable_card(self, card_id, account_id, user_id):
+        return await Card.disable_card(self.session, card_id, account_id, user_id)
 
-    async def enable_card(self, card_id, repo):
-        return await repo.enable_card(card_id)
+    async def enable_card(self, card_id, account_id, user_id):
+        return await Card.enable_card(self.session, card_id, account_id, user_id)
 
     async def withdraw(self, account_id: int, amount: float):
         account =  await Account.get_account_by_id(self.session, account_id)
@@ -60,7 +62,6 @@ class DatabaseAdapter:
         return False
 
     async def check_balance(self, account_id: int):
-        print("ADPY: ", account_id)
         account = await  Account.check_balance(self.session, account_id)
         #account = await self.session.query(Account).filter_by(id=account_id).first()
         if account:

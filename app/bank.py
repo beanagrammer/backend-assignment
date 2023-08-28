@@ -11,17 +11,22 @@ class Bank:
     async def get_user(self, firstname: str, surname: str, adapter):
         return await adapter.get_user(firstname, surname)
 
-    async def register_card(self, account_id, adapter):
-        return await adapter.register_card(account_id)
+    async def register_card(self, account_id, user_id, adapter):
+        return await adapter.register_card(account_id, user_id)
     
     async def get_card(self, account_id, adapter):
         return await adapter.get_card(account_id)
 
-    async def disable_card(self, card_id, adapter):
-        return await adapter.disable_card(card_id)
+    async def disable_card(self, card_id, account_id, user_id, adapter):
+        print("App: ", card_id, account_id, user_id)
+        return await adapter.disable_card(card_id, account_id, user_id)
 
-    async def enable_card(self, card_id, adapter):
-        return await adapter.enable_card(card_id)
+    async def enable_card(self, card_id, account_id, user_id, adapter):
+        print("App: ", card_id, account_id, user_id)
+        return await adapter.enable_card(card_id, account_id, user_id)
+
+    async def is_enabled(self, card_id, account_id, user_id, adapter):
+        return await adapter.is_enabled(card_id, account_id, user_id)
 
     async def withdraw(self, account_id: int, amount: float, adapter):
         return await adapter.withdraw(account_id, amount)

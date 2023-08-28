@@ -1,7 +1,7 @@
-import logging
+import logging, os
 
-from bank import Bank
-from bankAdapter import DatabaseAdapter
+from app.bank import Bank
+from app.bankAdapter import DatabaseAdapter
 from sqlalchemy.orm import sessionmaker
 
 import asyncio
@@ -104,22 +104,22 @@ class AccountSelectedState(State):
             if card:
                 logging.info("Card already registered for this account.")
             else:
-                card = await context.bank_app.register_card(context.selected_account.id, context.db_adapter)
+                card = await context.bank_app.register_card(context.selected_account.id, context.user.id, context.db_adapter)
                 logging.info(f"{card.card_number} got registered on {context.selected_account.id}")
         elif choice == '4':
             card = await context.bank_app.get_card(context.selected_account.id, context.db_adapter)
-            if card and not card.is_enabled:
-                await context.bank_app.enable_card(card.id, context.db_adapter)
-                logging.info(f"{card.card_number} got enabled on {context.selected_account.id}")
+            if card and not card.enabled:
+                await context.bank_app.enable_card(card.id, context.selected_account.id, context.user.id, context.db_adapter)
+                logging.info(f"Card got enabled on account{context.selected_account.id}")
             else:
-                logging.info(f"Card {card.card_number}  is already enabled or not found.")
+                logging.info(f"Card  is already enabled or not found.")
         elif choice == '5':
             card = await context.bank_app.get_card(context.selected_account.id, context.db_adapter)
-            if card and card.is_enabled:
-                await context.bank_app.disable_card(card.id, context.db_adapter)
-                logging.info(f"{card.card_number} got disabled on {context.selected_account.id}")
+            if card and card.enabled:
+                await context.bank_app.disable_card(card.id, context.selected_account.id, context.user.id, context.db_adapter)
+                logging.info(f"Card got disabled on account {context.selected_account.id}")
             else:
-                logging.info(f"Card {card.card_number} is already disabled or not found.")
+                logging.info(f"Card is already disabled or not found.")
         elif choice == "6":
             current_balance = await context.bank_app.check_balance(context.selected_account.id, context.db_adapter)
             logging.info(f"Current account balance: {current_balance}")
@@ -155,6 +155,9 @@ class SimulatorContext:
 
 
 if __name__ == "__main__":
+    #import sys
+    #sys.path.append('./')
+    print(os.getcwd())
     from logging.handlers import TimedRotatingFileHandler
     # Define the logging configuration
     log_filename = f"log/bering_bank.log"

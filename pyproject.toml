@@ -2,12 +2,6 @@
 addopts = "-s -v --tb=auto"
 testpaths = "tests"
 
-env = [
-    "STAGE=testing",
-    "SQLALCHEMY_WARN_20=1"
-]
-
-
 [tool.poetry]
 name = "bering-assignment"
 version = "1.0.0"
